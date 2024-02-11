@@ -5,6 +5,10 @@
 #include "i80_bus.h"
 #include "rgb_bus.h"
 
+#ifdef SDL_INCLUDE_PATH
+    #include "sdl_bus.h"
+#endif
+
 // micropython includes
 #include "py/obj.h"
 #include "py/runtime.h"
@@ -292,6 +296,11 @@ STATIC const mp_map_elem_t mp_module_lcd_bus_globals_table[] = {
     { MP_ROM_QSTR(MP_QSTR_SPIBus),             (mp_obj_t)&mp_lcd_spi_bus_type        },
     { MP_ROM_QSTR(MP_QSTR_I2CBus),             (mp_obj_t)&mp_lcd_i2c_bus_type        },
     { MP_ROM_QSTR(MP_QSTR_I80Bus),             (mp_obj_t)&mp_lcd_i80_bus_type        },
+
+    #ifdef SDL_INCLUDE_PATH
+        { MP_ROM_QSTR(MP_QSTR_SDLBus),         (mp_obj_t)&mp_lcd_sdl_bus_type        },
+    #endif
+
     #ifdef ESP_IDF_VERSION
         { MP_ROM_QSTR(MP_QSTR_MEMORY_32BIT),    MP_ROM_INT(MALLOC_CAP_32BIT)    },
         { MP_ROM_QSTR(MP_QSTR_MEMORY_8BIT),     MP_ROM_INT(MALLOC_CAP_8BIT)     },
